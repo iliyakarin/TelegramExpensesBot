@@ -59,7 +59,7 @@ def add_current_month_expense_by_default(message):
     if message.from_user.id == 395147397:
         try:
             input_list = message.text.split(':')
-            sh = gc.open("Copy of " + datem.today().strftime("%Y.%m") + " Family budget FOR TEST")
+            sh = gc.open(datem.today().strftime("%Y.%m") + " Family budget")
             worksheet_list = sh.worksheets()
             worksheet_list = worksheet_list[:len(worksheet_list) - 2]
             category_list = []
@@ -107,7 +107,7 @@ def add_current_month_expense_by_default_category(message, input_list, worksheet
         if worksheet_list[category_num] in worksheet_list and int(message.text) > 0:
             bot.send_message(message.chat.id, 'You have chosen: ' + str(message.text) + ") " +
                              (worksheet_list[category_num]).title)
-            sh = gc.open("Copy of " + datem.today().strftime("%Y.%m") + " Family budget FOR TEST")
+            sh = gc.open(datem.today().strftime("%Y.%m") + " Family budget")
             today_date = datem.today().strftime("%d.%m.%Y")
             worksheet_list = sh.worksheets()
             worksheet = worksheet_list[category_num]
@@ -197,7 +197,7 @@ def current_month_balance(message):
     executes with command /CurrentMonthBalance
     """
     if message.from_user.id == 395147397:
-        sh = gc.open("Copy of " + datem.today().strftime("%Y.%m") + " Family budget FOR TEST")
+        sh = gc.open(datem.today().strftime("%Y.%m") + " Family budget")
         worksheet = sh.worksheet("Balance")
         bot.send_message(message.chat.id, "Current month income is: " + worksheet.acell('B18').value)
         bot.send_message(message.chat.id, "Current month expenses are: " + worksheet.acell('D18').value)
@@ -211,7 +211,7 @@ def count_category_rows_expenses(month):
     Counts number of rows on balance sheet for all expenses.
     And returning list of all expenses from balance sheet.
     """
-    sh = gc.open("Copy of " + month + " Family budget FOR TEST")
+    sh = gc.open(month + " Family budget")
     worksheet = sh.worksheet("Balance")
     values_list = worksheet.col_values(3)
     values_list.pop(0)
@@ -230,7 +230,7 @@ def add_current_month_expense(message):
     add_current_month_expense_input_cat -
     """
     if message.from_user.id == 395147397:
-        sh = gc.open("Copy of " + datem.today().strftime("%Y.%m") + " Family budget FOR TEST")
+        sh = gc.open(datem.today().strftime("%Y.%m") + " Family budget")
         worksheet_list = sh.worksheets()
         worksheet_list = worksheet_list[:len(worksheet_list) - 2]
         category_list = []
@@ -279,7 +279,7 @@ def add_current_month_expense_input_string(message, category_num):
     """
     input_list = message.text.split(':')
     if len(input_list) == 2:
-        sh = gc.open("Copy of " + datem.today().strftime("%Y.%m") + " Family budget FOR TEST")
+        sh = gc.open(datem.today().strftime("%Y.%m") + " Family budget")
         today_date = datem.today().strftime("%d.%m.%Y")
         worksheet_list = sh.worksheets()
         worksheet = worksheet_list[category_num]
@@ -320,7 +320,7 @@ def add_current_month_expense_input_string(message, category_num):
         bot.send_message(message.chat.id,
                          "You have entered *** " + message.text + " *** - wrong input format (Expense:price) or not 2 "
                                                                   "parameters in the input")
-        sh = gc.open("Copy of " + datem.today().strftime("%Y.%m") + " Family budget FOR TEST")
+        sh = gc.open(datem.today().strftime("%Y.%m") + " Family budget")
         worksheet_list = sh.worksheets()
         msg = bot.reply_to(message, "Please enter the expense for "
                                     "" + str(datem.today().strftime("%Y.%m")) + ""
@@ -352,7 +352,7 @@ def defined_month_expense_date(message):
     month = message.text
     try:
         bot.send_message(message.chat.id, 'You have entered: ' + month)
-        sh = gc.open("Copy of " + month + " Family budget FOR TEST")
+        sh = gc.open(month + " Family budget")
         worksheet_list = sh.worksheets()
         worksheet_list = worksheet_list[:len(worksheet_list) - 2]
         category_list = []
@@ -407,7 +407,7 @@ def add_defined_month_expense_input(message, month, category_num):
     input_list = expense.split(':')
     try:
         if len(input_list) == 3:
-            sh = gc.open("Copy of " + month + " Family budget FOR TEST")
+            sh = gc.open(month + " Family budget")
             worksheet_list = sh.worksheets()
             worksheet = worksheet_list[category_num]
             empty_string = next_available_row(worksheet)
@@ -446,7 +446,7 @@ def add_defined_month_expense_input(message, month, category_num):
                              "You have entered *** "
                              "" + str(expense) + "*** - wrong input format (Expense:date:price) or "
                              "not 3 parameters in the input")
-            sh = gc.open("Copy of " + month + " Family budget FOR TEST")
+            sh = gc.open(month + " Family budget")
             worksheet_list = sh.worksheets()
             msg = bot.reply_to(message, "Please enter the expense for "
                                         "" + str(month) + ""
@@ -481,7 +481,7 @@ def current_month_expense_by_category(message):
     """
     if message.from_user.id == 395147397:
         try:
-            sh = gc.open("Copy of " + datem.today().strftime("%Y.%m") + " Family budget FOR TEST")
+            sh = gc.open(datem.today().strftime("%Y.%m") + " Family budget")
             month = datem.today().strftime("%Y.%m")
             worksheet = sh.worksheet("Balance")
             values_list = count_category_rows_expenses(month)
@@ -535,7 +535,7 @@ def exact_month_balance_input(message):
     This function is 2/2 step process of returning to chat balance statistics for defined month.
     """
     try:
-        sh = gc.open("Copy of " + message.text + " Family budget FOR TEST")
+        sh = gc.open(message.text + " Family budget")
         bot.send_message(message.chat.id, 'You have entered: ' + message.text)
         worksheet = sh.worksheet("Balance")
         bot.send_message(message.chat.id, message.text + " month income is: " + worksheet.acell('B18').value)
@@ -580,7 +580,7 @@ def exact_month_expense_by_category_input(message):
     """
     month = message.text
     try:
-        sh = gc.open("Copy of " + month + " Family budget FOR TEST")
+        sh = gc.open(month + " Family budget")
         bot.send_message(message.chat.id, 'You have entered: ' + month)
         worksheet = sh.worksheet("Balance")
         values_list = count_category_rows_expenses(month)
@@ -636,7 +636,7 @@ def format_defined_file_input(message):
     month = message.text
     try:
         bot.send_message(message.chat.id, 'You have entered: ' + month)
-        sh = gc.open("Copy of " + month + " Family budget FOR TEST")
+        sh = gc.open(month + " Family budget")
         worksheet_list = sh.worksheets()
         balance_sheet = worksheet_list[-1]
         worksheet_list = worksheet_list[:len(worksheet_list) - 1]
