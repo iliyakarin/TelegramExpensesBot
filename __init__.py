@@ -7,9 +7,10 @@ from datetime import datetime
 import logging
 from time import sleep
 import os
+from dotenv import load_dotenv
 
-
-TG_API_TOKEN = os.environ.get('TG_API_TOKEN')
+load_dotenv()
+TG_API_TOKEN = os.getenv('TG_API_TOKEN')
 SERVICE_ACCOUNT = os.environ.get('SERVICE_ACCOUNT')
 URL = 'https://api.telegram.org/bot' + TG_API_TOKEN + '/'
 # noinspection SpellCheckingInspection
