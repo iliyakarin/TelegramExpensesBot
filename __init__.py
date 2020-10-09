@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 TG_API_TOKEN = os.getenv('TG_API_TOKEN')
-SERVICE_ACCOUNT = os.environ.get('SERVICE_ACCOUNT')
+SERVICE_ACCOUNT = os.getenv('SERVICE_ACCOUNT')
 URL = 'https://api.telegram.org/bot' + TG_API_TOKEN + '/'
 # noinspection SpellCheckingInspection
 datem = datetime(datetime.today().year, datetime.today().month, 1)
