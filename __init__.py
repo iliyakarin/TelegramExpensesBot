@@ -636,7 +636,9 @@ def format_defined_file_input(message):
     """
     month = message.text
     try:
-        bot.send_message(message.chat.id, 'You have entered: ' + month)
+        bot.send_message(message.chat.id, 'You have entered: ' + month + '\nPlease be patient, '
+                                          'operation could take a while. Execution time depends on number of cells'
+                                          ' and lists in the document, you will get message on completion.')
         sh = gc.open(month + " Family budget")
         worksheet_list = sh.worksheets()
         balance_sheet = worksheet_list[-1]
@@ -724,7 +726,7 @@ def format_defined_file_input(message):
                                                            "fontFamily": 'Arial'
                                                        }
                                                        })
-        bot.send_message(message.chat.id, "Document re-formatting completed!!!")
+        bot.send_message(message.chat.id, "Document re-formatting completed successfully!!!")
     except gspread.SpreadsheetNotFound as fe:
         if any(str(message.text) in s for s in ['exit', 'start', 'help']):
             bot.send_message(message.chat.id, 'Exit initiated!!!\n You can start from beginning with '
